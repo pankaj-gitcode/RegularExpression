@@ -74,8 +74,9 @@ const date = ()=>{
 
 
 
-//                          ************************************************ 
+//                          **********************************************************
 //                              BASIC REGGULAR EXPRESSION - Match a Specific Word
+//                          **********************************************************
 
 //Q.5.1 Write a regex to match the word "hello" in a string.
 const matchWord = ()=>{
@@ -90,8 +91,11 @@ const matchWord = ()=>{
 }
 // console.log(matchWord());
 
-//Q.5. Matching Digits
-//.2. Write a regex to match any sequence of digits in a string. Example string: "abc123def456", "no digits here", "789only"
+//                          ************************************************
+//                                      Matching Digits
+//                          ************************************************
+
+//Q.5.2. Write a regex to match any sequence of digits in a string. Example string: "abc123def456", "no digits here", "789only"
 
 const matchDigit = ()=>{
     const str = "789only";
@@ -103,17 +107,118 @@ const matchDigit = ()=>{
 // console.log(matchDigit());
 
 
-//                          ************************************************ 
+//                          ******************************************************* 
+//                                  Matching a specific Pattern: date pattern
+//                          ******************************************************* 
 
-//.Q.5.3 👉🏻 Matching a specific Pattern--- Write a regex to match a date in the format dd-mm-yyyy. Ex:  "23-05-2024", "date: 12-12-2020", "invalid date"
+//.Q.5.3 👉🏻  Write a regex to match a date in the format dd-mm-yyyy. Ex:  "23-05-2024", "date: 12-12-2020", "invalid date"
 const matchDate = ()=>{
-    const str = "invalid date";
+    const str = "12-12-2020";
+    const str1 = "invalid date";
     const regEx = /^\d{2}-\d{2}-\d{4}$/;
     const res = regEx.test(str);
     const resMatch = str.match(regEx);
     return [{res, resMatch}];
 }
-console.log(matchDate());
+// console.log(matchDate());
+
+
+//                          *********************************************************
+//                              Intermediate Regular Expressions: email Validation
+//                          *********************************************************
+
+//Q.6.1. 👉🏻Email Validation: Write a regex to validate an email address. Ex: "user@example.com", "user.name+tag+sorting@example.com", "invalid@com"
+
+const emailValidation = ()=>{
+    const str = "user.name+tag+sorting@example.com";
+    const str1= "user12.kl@mail";
+
+    const regEx = /^[A-Za-z\d+-_.]+\@[A-Za-z\d]+\.[A-Za-z\d]{2,}$/; //{2}=> bcs TopLevelDomain is always atleast 2digit not single .in,.com,not->.c
+    const res = regEx.test(str);
+    const resMatch = str.match(regEx);
+    return [{res, resMatch}];
+}
+// console.log(emailValidation());
+
+
+
+//                          ************************************************
+//                               Extracting Text Inside Parentheses [^..]
+//                          ************************************************
+
+//Q.6.2. Write a regex to extract text inside parentheses.Ex: "extract (this text)", "another (example) here", "no parentheses"
+const extractText = ()=>{
+    const str = "extract (this text)";
+    const regEx = /\([^)]+\)/g
+    const res = regEx.test(str);
+    const resMatch = str.match(regEx);
+    return [{res, resMatch}];
+}
+// console.log("Extract: ",extractText())
+
+
+//                          ************************************************
+//                               Matching Hexadecimal Colors
+//                          ************************************************
+//Q.6.3 Write a regex to match hexadecimal color codes.Ex: "#ff5733", "#C0C0C0", "not a color"
+const hexadecimalMatch = ()=>{
+    const str = "#ff5733 hello";
+    const regEx = /\#[A-fa-f\d]{6}/g //Q: whay A-F or a-f only not A-Za-z
+    const res = regEx.test(str);
+    const resExec = regEx.exec(str);
+    const resMatch = str.match(regEx);
+    return [{res, resExec, resMatch}];
+}
+// console.log(hexadecimalMatch());
+
+
+//          ----------| Advanced Regular Expressions |------------------
+
+//                          ********************************
+//                               Phone Number Validation
+//                          *********************************
+
+//Q.7.1. Write a regex to validate a phone number in the format (xxx) xxx-xxxx.Ex: "(123) 456-7890", "(098) 765-4321", "invalid phone"
+
+const phoneNumValidation = ()=>{
+    const str = "(123) 456-7890 kjkjkj";
+    const str1 = "invalid phone";
+
+    const regEx = /\(\d{3}\)\s\d{3}-\d{4}/g;
+    const res = regEx.test(str);
+    const resMatch = str.match(regEx);
+    const resExec = regEx.exec(str);
+
+    return [{res, resMatch, resExec}]
+}
+// console.log(phoneNumValidation())
+
+
+//                          ************************************************
+//                                      Password Validation
+//                          ************************************************
+
+//.q.7.2. Write a regex to validate a password with at least one lowercase letter, one uppercase letter, one digit, and one special character, and a minimum length of 8 characters. Ex: "Aa1@bcdef", "WeakPass1", "Str0ng#Pass!"
+//check for lower/Upper-Case, digits, specl. symb. if avl. throught the string: (?=.*[A-za-z])...
+
+const passwordValidation = ()=>{
+    const str1 = "Aa1@bcdef";
+    const str2 = "WeakPass1"; const str3 = "Str0ng#Pass!";
+    const strArr = ["Aa1@bcdef","WeakPass1&", "Str0ng#Pass!"];
+    
+    const regEx1 = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[~!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,16}$/;
+    const regEx = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()])[A-Za-z\d~!@#$%^&*()]{8,16}$/;
+
+    const res = strArr.map(elem=>{
+        const resTest = regEx.test(elem);
+        const resExec = regEx.exec(elem);
+        const resMatch = elem.match(regEx);
+        console.log([resTest, resExec, resMatch])
+        return [{resTest, resExec, resMatch}];
+    })
+    return res;
+}
+console.log("Password-Validation: ", passwordValidation());
 
 
 
@@ -122,7 +227,10 @@ console.log(matchDate());
 
 
 
-//                          ************************************************ 
+
+//                          ************************************************
+//                               Extracting Text Inside Parentheses
+//                          ************************************************
 
 
 
@@ -134,4 +242,25 @@ console.log(matchDate());
 
 
 
-//                          ************************************************ 
+
+
+//                          ************************************************
+//                               Extracting Text Inside Parentheses
+//                          ************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                          ************************************************
+//                               Extracting Text Inside Parentheses
+//                          ************************************************

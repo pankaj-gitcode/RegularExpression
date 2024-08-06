@@ -20,10 +20,10 @@ Special characters with specific meanings:
 - `()`: Groups part of the regex together and creates a capturing group.
 - `|`: Acts as a logical OR.
 
-### Character Classes
+### Character Classes: []
 - `[abc]`: Matches any one of the characters a, b, or c.
 - `[a-z]`: Matches any one character from a to z.
-- `[^abc]`: Matches any character except a, b, or c.
+- `[^abc]`: Matches any character except a, b, or c., '^' used inside [] so negate the set
 
 ### Quantifiers
 - `{n}`: Matches exactly n occurrences.
