@@ -95,19 +95,25 @@ const matchWord = ()=>{
 
 const matchDigit = ()=>{
     const str = "789only";
-    const regEx = /^.*\d+.*$/  // .* : no matter chars,any symbol at start or end
+    const regEx = /^.*\d+.*$/  // .* : no matter how many chars,any symbol at start or end
     const res = regEx.test(str);
     const resMatch = str.match(regEx);
     return [{res, resMatch}];
 }
-console.log(matchDigit());
-
-
+// console.log(matchDigit());
 
 
 //                          ************************************************ 
 
-
+//.Q.5.3 👉🏻 Matching a specific Pattern--- Write a regex to match a date in the format dd-mm-yyyy. Ex:  "23-05-2024", "date: 12-12-2020", "invalid date"
+const matchDate = ()=>{
+    const str = "invalid date";
+    const regEx = /^\d{2}-\d{2}-\d{4}$/;
+    const res = regEx.test(str);
+    const resMatch = str.match(regEx);
+    return [{res, resMatch}];
+}
+console.log(matchDate());
 
 
 
