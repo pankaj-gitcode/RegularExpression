@@ -202,8 +202,6 @@ const phoneNumValidation = ()=>{
 //check for lower/Upper-Case, digits, specl. symb. if avl. throught the string: (?=.*[A-za-z])...
 
 const passwordValidation = ()=>{
-    const str1 = "Aa1@bcdef";
-    const str2 = "WeakPass1"; const str3 = "Str0ng#Pass!";
     const strArr = ["Aa1@bcdef","WeakPass1&", "Str0ng#Pass!"];
     
     const regEx1 = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[~!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,16}$/;
@@ -218,20 +216,29 @@ const passwordValidation = ()=>{
     })
     return res;
 }
-console.log("Password-Validation: ", passwordValidation());
+// console.log("Password-Validation: ", passwordValidation());
 
 
 
+//                          ************************************
+//                              ⭐ Extracting URLs from Text🚩
+//                          ************************************
 
+//.Q.7.3: Write a regex to extract URLs from a string. Ex: "visit https://example.com and http://test.com", "no url here", "another url: https://example.org"
 
-
-
-
-
-//                          ************************************************
-//                               Extracting Text Inside Parentheses
-//                          ************************************************
-
+const URLExtract = ()=>{
+   const strArry = ["visit https://example.com", "http://test.com", "no url here", "another url: https://example.org"];
+   return strArry.map(str=>{
+    const regEx = /https?:\/\/[A-Za-z\d]+\.[A-Za-z]+/g;
+    const res = regEx.test(str);
+    const resExec = regEx.exec(str);
+    const resMatch = str.match(regEx);
+    console.log([{res, resExec, resMatch}]);
+    return [{res, resExec, resMatch}];
+    })
+    
+}
+console.log(URLExtract());
 
 
 
